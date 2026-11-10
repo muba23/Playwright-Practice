@@ -1,7 +1,9 @@
-class SignUpPage {
+import { Base } from "./Base.js";
+
+class SignUpPage extends Base {
   constructor(page) {
+    super(page);
     this.page = page;
-    this.pageURL = 'https://demowebshop.tricentis.com/'; // URL of the Demowebshop page
    
     // Locators for the elements on the Sign Up page
     this.registerLink = page.locator('a[href="/register"]'); // Locator for the register link
@@ -12,23 +14,15 @@ class SignUpPage {
     this.passwordInput = page.locator('#Password'); 
     this.confirmPasswordInput = page.locator('#ConfirmPassword');
     this.registerButton = page.locator('#register-button');
+    this.verifyLogin = page.locator('a[href="/logout"]'); // Locator for the logout link
 }
 
-async pageOpen() {
-    await this.page.goto(this.pageURL, {
-        waitUntil: 'domcontentloaded',
-        timeout: 60000
-    });
-   //await this.page.goto('https://demowebshop.tricentis.com/');
-
-  }
-
 async clickRegisterLink() {
-    await this.registerLink.click(); // function for the locator to click the register link
+    await this.clickElement(this.registerLink); // function for the locator to click the register link
   }
 
   async selectGender() {
-    await this.genderRadioButton.click(); // function for the locator to select the gender radio button
+    await this.clickElement(this.genderRadioButton); // function for the locator to select the gender radio button
   }
 async fillFirstName(firstName) {
     await this.firstNameInput.fill(firstName); // function for the locator to fill the first name input field
@@ -51,7 +45,7 @@ async fillConfirmPassword(confirmPassword) {
   }
 
 async clickRegisterButton() {
-    await this.registerButton.click(); // function for the locator to click the register button
+    await this.clickElement(this.registerButton); // function for the locator to click the register button
   }
 
 }
